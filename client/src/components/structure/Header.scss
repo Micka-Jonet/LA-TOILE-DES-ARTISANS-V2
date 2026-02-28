@@ -1,0 +1,152 @@
+@import '../../styles/variables';
+
+.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  z-index: 1000;
+
+  .logo a {
+    color: $white !important;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    span { color: $orange-main; }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    // Style partagé pour les liens avec soulignement (Request & Dashboard)
+    .nav-link-request, .nav-link-dashboard {
+      position: relative;
+      display: inline-block;
+      color: $white !important;
+      font-weight: 600;
+      padding: 5px 0;
+      text-decoration: none;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $orange-main;
+        transition: width 0.3s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+
+    // Style partagé pour les boutons (Espace Artisan & Déconnexion)
+    .btn-artisan, .btn-logout {
+      background-color: transparent;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    // Bouton Espace Artisan (Orange)
+    .btn-artisan {
+      color: $orange-main;
+      border: 2px solid $orange-main;
+
+      &:hover {
+        background-color: $orange-main;
+        color: $white;
+      }
+    }
+
+    // Bouton Déconnexion (on peut le mettre en rouge ou garder l'orange pour la cohérence)
+    .btn-logout {
+      color: #ff4d4d; // Rouge pour la déconnexion
+      border: 2px solid #ff4d4d;
+
+      &:hover {
+        background-color: #ff4d4d;
+        color: $white;
+      }
+    }
+  }
+
+  // --- STYLE DU BURGER (MOBILE) ---
+  .burger-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1100;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: $white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    &.open {
+      span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    }
+  }
+
+  // --- RESPONSIVE ---
+  @media (max-width: 768px) {
+    padding: 20px;
+
+    .burger-icon {
+      display: flex;
+    }
+
+    .header-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background-color: #1a2a44; // Ton bleu foncé
+      padding-top: 100px;
+      transition: right 0.4s ease;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+
+      &.active {
+        right: 0;
+      }
+
+      .header-actions {
+        flex-direction: column;
+        gap: 40px;
+
+        .nav-link-request, .nav-link-dashboard {
+          font-size: 1.2rem;
+          &::after { display: none; }
+        }
+
+        .btn-artisan, .btn-logout {
+          width: 80%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

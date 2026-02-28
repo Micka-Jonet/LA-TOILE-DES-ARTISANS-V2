@@ -1,0 +1,198 @@
+@import '../styles/variables';
+
+// --- ANIMATIONS ---
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-page {
+  // --- SECTION FEATURES (DESIGN HORIZONTAL + ANIMÉ) ---
+  .features {
+    padding: 100px 50px;
+    background: linear-gradient(180deg, $white 0%, #f8fafc 100%);
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+      gap: 30px;
+    }
+
+    .feature-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 25px;
+      padding: 35px;
+      background: $white;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      
+      // Animation d'entrée
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+
+      // Effet de cascade (délai différent pour chaque carte)
+      &:nth-child(1) { animation-delay: 0.1s; }
+      &:nth-child(2) { animation-delay: 0.3s; }
+      &:nth-child(3) { animation-delay: 0.5s; }
+
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      &:hover {
+        transform: translateX(10px); 
+        box-shadow: 0 20px 40px rgba($orange-main, 0.1);
+        border-color: rgba($orange-main, 0.2);
+
+        .icon-wrapper {
+          background-color: $orange-main;
+          color: $white;
+          transform: scale(1.1);
+        }
+      }
+
+      .icon-wrapper {
+        flex-shrink: 0;
+        width: 65px;
+        height: 65px;
+        background-color: rgba($orange-main, 0.1);
+        color: $orange-main;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+      }
+
+      .card-content {
+        h3 {
+          color: #1a2a44;
+          margin-bottom: 10px;
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-top: 5px;
+        }
+
+        p {
+          color: #64748b;
+          line-height: 1.6;
+          font-size: 0.95rem;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  // --- SECTION ÉTAPES (STYLE NOIR & ORANGE) ---
+  .steps {
+    padding: 120px 50px;
+    background-color: #1a2a44;
+    color: $white;
+    text-align: center;
+    overflow: hidden;
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 80px;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: $orange-main;
+        border-radius: 2px;
+      }
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .step {
+      flex: 1;
+      position: relative;
+
+      .step-number {
+        font-size: 6rem;
+        font-weight: 900;
+        color: rgba($orange-main, 0.15); 
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .step-content {
+        position: relative;
+        z-index: 2;
+
+        h4 {
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+        }
+
+        p {
+          color: #bdc3c7;
+          line-height: 1.6;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  // --- RESPONSIVE ---
+  @media (max-width: 992px) {
+    .steps-container {
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features, .steps {
+      padding: 70px 20px;
+    }
+
+    .features .container {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+      &:hover {
+        transform: translateY(-5px); // Sur mobile, le décalage horizontal est moins intuitif
+      }
+    }
+
+    .steps-container {
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .step .step-number {
+      font-size: 5rem;
+      top: -50px;
+    }
+  }
+}

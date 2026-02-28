@@ -1,0 +1,13 @@
+# Ignore les modules dans tous les sous-dossiers
+node_modules/
+client/node_modules
+server/node_modules
+
+# Ignore les fichiers d'environnement
+.env 
+server/.env
+client/.env
+
+# Ignore les builds
+dist/
+build/

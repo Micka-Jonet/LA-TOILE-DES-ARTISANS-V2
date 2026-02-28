@@ -1,0 +1,246 @@
+// On importe tes fichiers globaux au début
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.devis-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+  background-color: #f8fafc; // Ou une variable si tu en as une pour le BG
+  min-height: 90vh;
+  font-family: 'Inter', sans-serif;
+
+  .form-card {
+    // Ici j'utilise ton mixin s'il existe, sinon je garde les propriétés
+    background: $white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 650px;
+    border: 1px solid #edf2f7;
+
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+      position: relative;
+      max-width: 350px;
+      margin: 0 auto 50px auto;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #e2e8f0;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+
+      .step {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: $white;
+        border: 2px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #64748b;
+        z-index: 2;
+        transition: all 0.3s ease;
+
+        &.active {
+          border-color: $orange-main;
+          background: $orange-main;
+          color: $white;
+          box-shadow: 0 0 0 4px rgba($orange-main, 0.15);
+        }
+
+        &.completed {
+          background: #22c55e;
+          border-color: #22c55e;
+          color: $white;
+        }
+      }
+    }
+
+    .form-step {
+      h2 {
+        font-size: 1.6rem;
+        color: #1e293b;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 800;
+      }
+
+      .input-row {
+        display: flex;
+        gap: 15px;
+        @media (max-width: 600px) { flex-direction: column; gap: 0; }
+      }
+
+      .input-group {
+        margin-bottom: 22px;
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-weight: 600;
+          font-size: 0.9rem;
+          margin-bottom: 8px;
+          color: #475569;
+        }
+
+        input, select, textarea {
+          padding: 14px;
+          border: 2px solid #e2e8f0;
+          border-radius: 12px;
+          font-size: 1rem;
+          color: #1e293b;
+          background-color: #fcfcfd;
+          transition: all 0.2s ease;
+
+          &:focus {
+            border-color: $orange-main;
+            outline: none;
+            background-color: $white;
+            box-shadow: 0 4px 12px rgba($orange-main, 0.08);
+          }
+
+          &:disabled {
+            background-color: #f1f5f9;
+            cursor: not-allowed;
+          }
+        }
+
+        textarea { min-height: 120px; resize: vertical; }
+
+        &.error {
+          input, select, textarea {
+            border-color: #ef4444;
+            background-color: #fffafb;
+          }
+          .error-text {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid #f1f5f9;
+
+      button {
+        flex: 1;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        transition: all 0.25s ease;
+
+        &:disabled {
+          background-color: #cbd5e1;
+          color: $white;
+          cursor: not-allowed;
+        }
+      }
+
+      .btn-next, .btn-submit {
+        background: $orange-main;
+        color: $white;
+        &:hover:not(:disabled) {
+          background: darken($orange-main, 5%);
+          transform: translateY(-2px);
+        }
+      }
+
+      .btn-back {
+        background: #f1f5f9;
+        color: #64748b;
+        max-width: 130px;
+        &:hover { background: #e2e8f0; }
+      }
+    }
+  }
+}
+
+// --- ÉCRANS SUCCÈS & ANTI-SPAM ---
+.success-container, .spam-blocked {
+  background: $white;
+  padding: 60px 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  text-align: center;
+  margin: 80px auto;
+  width: 100%;
+  max-width: 600px;
+
+  .check-icon, .timer-circle {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .check-icon {
+    background: #22c55e;
+    color: $white;
+    font-size: 45px;
+    animation: bounceIn 0.5s ease;
+  }
+
+  .timer-circle {
+    background: lighten($orange-main, 45%);
+    color: $orange-main;
+    border: 3px solid $orange-main;
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: monospace;
+  }
+
+  h2 { font-size: 2rem; color: #1e293b; margin-bottom: 15px; font-weight: 800; }
+  p { color: #64748b; line-height: 1.6; margin-bottom: 35px; font-size: 1.1rem; }
+
+  .btn-home {
+    display: inline-block;
+    background: #1e293b;
+    color: $white;
+    padding: 16px 40px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    &:hover { background: $orange-main; transform: scale(1.05); }
+  }
+}
+
+.anim-in { animation: slideUp 0.5s ease-out forwards; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}

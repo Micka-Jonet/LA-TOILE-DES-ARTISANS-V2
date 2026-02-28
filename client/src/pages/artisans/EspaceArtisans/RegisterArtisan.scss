@@ -1,0 +1,98 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.inscription-page {
+  display: flex; justify-content: center; align-items: center;
+  min-height: 85vh; padding: 40px 20px; background: #f8fafc;
+
+  .form-card {
+    background: $white; padding: 40px; border-radius: 24px;
+    width: 100%; max-width: 500px; border: 1px solid #edf2f7;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+
+    .stepper {
+      display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
+      .step {
+        width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; color: #94a3b8;
+        &.active { background: $orange-main; color: white; }
+      }
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      label { display: block; font-weight: 700; color: $text-dark; margin-bottom: 8px; font-size: 0.9rem; }
+      
+      // ✅ Style unifié pour Input ET Select
+      input, select {
+        width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px;
+        font-size: 1rem; transition: 0.3s;
+        background-color: white; // Force le fond blanc
+        
+        &:focus { border-color: $orange-main; outline: none; }
+        &.input-error { border-color: $red-error; background: rgba($red-error, 0.02); }
+        &.read-only-input { background: #f1f5f9; color: $text-light; cursor: not-allowed; }
+      }
+
+      // ✅ Style spécifique pour la liste déroulante
+      select {
+        cursor: pointer;
+        appearance: none; // Enlève la flèche par défaut
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        
+        // Ajout d'une flèche personnalisée (SVG orange pour coller à ton thème)
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff6b00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 1.1rem;
+        padding-right: 40px; // Évite que le texte chevauche la flèche
+
+        &:invalid, option[value=""] {
+          color: #94a3b8; // Couleur du texte par défaut (placeholder)
+        }
+        
+        option {
+          color: $text-dark;
+          background: white;
+          padding: 10px;
+        }
+      }
+
+      .error-text { color: $red-error; font-size: 0.8rem; font-weight: 600; margin-top: 5px; display: block; }
+      .loader-inline { color: $orange-main; font-size: 0.8rem; font-weight: 700; margin-top: 5px; }
+    }
+
+    .input-row { display: flex; gap: 15px; }
+    .btn-group { display: flex; gap: 10px; }
+
+    button {
+      width: 100%; padding: 16px; border-radius: 12px; border: none;
+      font-weight: 700; cursor: pointer; transition: 0.3s;
+      &.btn-primary {
+        background: $text-dark; color: white;
+        &:hover:not(:disabled) { background: $orange-main; transform: translateY(-2px); }
+        &:disabled { background: #cbd5e1; cursor: not-allowed; }
+      }
+      &.btn-back { background: #f1f5f9; color: $text-light; max-width: 100px; }
+    }
+  }
+
+  // Styles spécifiques Success Card
+  .success-card {
+    text-align: center;
+    .icon-box {
+      width: 70px; height: 70px; background: $green-success; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; color: white; font-size: 35px;
+    }
+    .mail-info { background: #f1f5f9; padding: 15px; border-radius: 12px; margin: 20px 0; }
+    .progress-container {
+      width: 100%; height: 5px; background: #e2e8f0; border-radius: 10px; overflow: hidden;
+      .progress-bar { height: 100%; background: $orange-main; width: 0; animation: load 4s linear forwards; }
+    }
+  }
+}
+
+@keyframes load { from { width: 0; } to { width: 100%; } }

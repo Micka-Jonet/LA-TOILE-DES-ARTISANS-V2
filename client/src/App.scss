@@ -1,0 +1,62 @@
+// src/App.scss
+
+// 1. IMPORT DES VARIABLES (La base de tout)
+@import './styles/variables';
+
+// 2. RESET GLOBAL & TYPOGRAPHIE
+// On s'assure que tout le monde utilise la même boîte (border-box) et la bonne police.
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden; // Empêche le scroll horizontal accidentel
+  font-family: 'Montserrat', sans-serif; // Ou ta police par défaut
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: $font-main; // Utilise ta variable Montserrat
+  background-color: #f9f9f9;
+  color: $text-dark;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 3. LE NETTOYAGE DES LIENS (Ton fameux problème de bleu/souligné)
+// On définit un état neutre. Les liens ne bougeront que si on leur demande.
+a {
+  text-decoration: none;
+  color: inherit; // Prend la couleur du texte qui l'entoure
+  transition: all 0.3s ease;
+  
+  // Sécurité pour éviter le retour du bleu après un clic
+  &:visited, &:active, &:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+  }
+}
+
+// 4. BASES DE MISE EN PAGE
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+// 5. CLASSES UTILITAIRES (Optionnel mais pratique)
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-orange { color: $orange-main; }

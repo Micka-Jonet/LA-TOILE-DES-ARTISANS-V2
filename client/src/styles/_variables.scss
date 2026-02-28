@@ -1,0 +1,28 @@
+// --- COULEURS ---
+$orange-main:#e67e22; // Orange bouton "Déposer une demande"
+$blue-footer: #1c2833; // Bleu/Noir très sombre du footer
+$text-dark:#2d241e; // Marron ébène pour les titres
+$text-light: #6d5f56; // Un marron grisé plus clair (Descriptions, labels, sous-titres)
+$bg-cream:#fdfbf9; // Fond ivoire des sections
+$white:#ffffff;
+$red-error: #ef4444; // Un rouge vif pour les alertes
+$green-success: #22c55e; // Autant l'ajouter pour plus tard !
+
+// --- TYPO ---
+$font-title: 'Montserrat', sans-serif;
+$font-body:  'Open Sans', sans-serif;
+$font-main: 'Montserrat', sans-serif;
+
+// --- LAYOUT ---
+$header-height: 80px;
+$max-width: 1200px;
+
+// --- TRANSITIONS ---
+// BOUTONS MAIN
+$transition-pro: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+// --- KEYFRAMES ---
+@keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}

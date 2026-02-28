@@ -1,0 +1,135 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.main-footer {
+  background-color: $white;
+  padding: 60px 0 20px;
+  border-top: 1px solid #edf2f7;
+  color: $text-dark;
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 0 20px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-col {
+    h4 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: $text-dark;
+    }
+
+    p {
+      color: $text-light;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: 12px;
+        a {
+          text-decoration: none;
+          color: $text-light;
+          transition: 0.3s;
+          &:hover { color: $orange-main; padding-left: 5px; }
+        }
+      }
+    }
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    span { color: $orange-main; }
+  }
+
+  // --- LES 3 CERCLES SOCIAUX ---
+  .social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+
+    .social-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: $text-dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      font-size: 0.8rem;
+
+      &:hover {
+        background: $orange-main;
+        color: $white;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  // --- BAS DE PAGE ET FLÈCHE ---
+  .footer-bottom {
+    margin-top: 50px;
+    padding: 20px 20px 0;
+    border-top: 1px solid #f1f5f9;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    .bottom-content {
+      text-align: center;
+      p { font-size: 0.85rem; color: #94a3b8; }
+      .legal-links {
+        margin-top: 10px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        a { font-size: 0.8rem; color: #94a3b8; text-decoration: none; &:hover { color: $text-dark; } }
+      }
+    }
+
+    .scroll-top {
+      position: absolute;
+      right: 20px;
+      bottom: 0;
+      width: 45px;
+      height: 45px;
+      background: $text-dark;
+      color: $white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      
+      .arrow { font-size: 1.5rem; font-weight: bold; }
+
+      &:hover {
+        background: $orange-main;
+        transform: translateY(-5px);
+      }
+    }
+  }
+}
