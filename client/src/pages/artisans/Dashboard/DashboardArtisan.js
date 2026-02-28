@@ -19,12 +19,10 @@ const DashboardArtisan = () => {
   const user = userRaw ? JSON.parse(userRaw) : null;
 
   useEffect(() => {
-    // Sécurité : Si pas de session, on dégage au login
     if (!user) {
       console.log("Accès refusé : pas d'utilisateur trouvé.");
       navigate("/login");
     } else {
-      // ton appel axios pour les tickets
       axios
         .get("http://localhost:5050/api/tickets/all")
         .then((res) => {
@@ -34,16 +32,13 @@ const DashboardArtisan = () => {
     }
   }, []);
 
-  // --- LOGIQUE DES INITIALES (Le correctif) ---
   const getInitials = () => {
     if (!user) return "??";
     const p = user.prenom || "";
     const n = user.nom || "";
-    // Si on a les deux, on les affiche, sinon on met ??
     return p && n ? (p[0] + n[0]).toUpperCase() : "??";
   };
 
-  // --- FILTRAGE ET RECHERCHE ---
   const filteredTickets = tickets.filter((t) => {
     const matchSearch =
       t.client_nom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -53,7 +48,6 @@ const DashboardArtisan = () => {
     return matchSearch && matchMetier;
   });
 
-  // --- PAGINATION ---
   const indexOfLastTicket = currentPage * ticketsPerPage;
   const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
   const currentTickets = filteredTickets.slice(
@@ -68,7 +62,6 @@ const DashboardArtisan = () => {
 
   return (
     <div className="dashboard-wrapper anim-in">
-      {/* --- SIDEBAR COMPLÈTE --- */}
       <aside className="dashboard-sidebar">
         <div className="user-profile-header">
           <div className="avatar-large">{getInitials()}</div>
@@ -89,7 +82,6 @@ const DashboardArtisan = () => {
         </nav>
       </aside>
 
-      {/* --- CONTENU PRINCIPAL --- */}
       <main className="dashboard-main">
         <header className="view-header">
           <div className="header-left">
@@ -128,9 +120,9 @@ const DashboardArtisan = () => {
           </div>
         ) : (
           <div className="content-grid">
-            {/* COLONNE DES TICKETS */}
             <div className="tickets-column">
-              <div className="section-title">
+              {/* ✅ HEADER UNIFIÉ GAUCHE */}
+              <div className="column-header">
                 <h3>Demandes à proximité ({filteredTickets.length})</h3>
               </div>
 
@@ -164,7 +156,6 @@ const DashboardArtisan = () => {
                 </div>
               )}
 
-              {/* PAGINATION */}
               {totalPages > 1 && (
                 <div className="pagination">
                   {[...Array(totalPages)].map((_, i) => (
@@ -180,10 +171,13 @@ const DashboardArtisan = () => {
               )}
             </div>
 
-            {/* COLONNE DES STATS / RÉSUMÉ */}
             <div className="stats-column">
-              <div className="stats-card user-summary">
+              {/* ✅ HEADER UNIFIÉ DROITE */}
+              <div className="column-header">
                 <h3>Mon Activité</h3>
+              </div>
+
+              <div className="stats-card user-summary">
                 <div className="stat-item">
                   <span>Entreprise</span>
                   <strong>{user.entreprise}</strong>
